@@ -11,6 +11,9 @@ public class Check extends HttpServlet {
             String password = req.getParameter("password");
 
             if (username.equals("allen") && password.equals("allen")) {
+                HttpSession session = req.getSession(true); 
+                session.setAttribute("PASS", "OK");
+                session.setMaxInactiveInterval(20);
                 res.sendRedirect("welcome?username=" + username + "&password=" + password);
             } else {
                 res.sendRedirect("login");

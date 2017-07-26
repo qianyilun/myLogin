@@ -12,7 +12,25 @@ public class Welcome extends HttpServlet {
 
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-            pw.println(username + " " + password);
+            HttpSession session = req.getSession(true);
+            String pass = (String) session.getAttribute("PASS");
+
+            // redirect to login web, notice: null is a specific value that needs to be considered
+            if (pass == null) {
+                res.sendRedirect("login");
+                // notice must return, otherwise has NullPointerException
+                return;                
+            }
+            
+
+            System.out.println("????");
+            
+            if (pass.equals("OK")) {
+                pw.println(username + " " + password);
+            } else {
+                res.sendRedirect("login");
+            }
+
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
