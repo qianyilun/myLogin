@@ -14,6 +14,7 @@ public class Welcome extends HttpServlet {
             String password = req.getParameter("password");
             HttpSession session = req.getSession(true);
             String pass = (String) session.getAttribute("PASS");
+            System.out.println(pass);
 
             // redirect to login web, notice: null is a specific value that needs to be considered
             if (pass == null) {
@@ -22,11 +23,11 @@ public class Welcome extends HttpServlet {
                 return;                
             }
             
-
-            System.out.println("????");
-            
             if (pass.equals("OK")) {
                 pw.println(username + " " + password);
+                String id = session.getId();
+                pw.println("id: " + id);
+
             } else {
                 res.sendRedirect("login");
             }

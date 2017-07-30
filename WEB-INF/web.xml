@@ -36,21 +36,27 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-<servlet>
-    <servlet-name>check</servlet-name>
-    <servlet-class>com.allen.Check</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>check</servlet-name>
-    <url-pattern>/check</url-pattern>
-</servlet-mapping>
+    <servlet>
+        <servlet-name>check</servlet-name>
+        <servlet-class>com.allen.Check</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>check</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
 
-<servlet>
-    <servlet-name>welcome</servlet-name>
-    <servlet-class>com.allen.Welcome</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>welcome</servlet-name>
-    <url-pattern>/welcome</url-pattern>
-</servlet-mapping>
+    <servlet>
+        <servlet-name>welcome</servlet-name>
+        <servlet-class>com.allen.Welcome</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>welcome</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+
+<!--
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config> -->
+
 </web-app>
