@@ -1,0 +1,24 @@
+* mysql -u root -p
+* SHOW DATABASES;
+* CREATE DATABASE test1;
+* USE test1;
+* SELECT DATABASE();
+* DROP DATABASE IF EXISTS test1;
+
+* CREATE TABLE student(
+	sex ENUM('M', 'F') NOT NULL,
+	first_name VARCHAR(30) NOT NULL,
+	second_name VARCHAR(30) NOT NULL,
+	student_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY);
+* CREATE TABLE score(
+	student_id INT UNSIGNED NOT NULL,
+	event_id INT UNSIGNED NOT NULL,
+	score INT NOT NULL,
+	PRIMARY KEY(event_id, student_id))
+* SHOW TABLES;
+* DESCRIBE student;
+
+* INSERT INTO student VALUE(
+	'Allen', 'Qian', NULL);
+
+* SELECT * FROM student;
