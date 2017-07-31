@@ -7,32 +7,58 @@ import java.sql.*;
 public class Check extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) {
+        Connection connection = null;
+        Statement sm = null;
+        ResultSet rs = null;
+
         try {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
 
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/" + "student_information" + "?autoReconnect=true&useSSL=false";
-            Connection connection = DriverManager.getConnection(url, "root", "   ");
-            Statement sm = connection.createStatement();
-            ResultSet rs = sm.executeQuery("SELECT * FROM student");
+            String databaseName = "student_info";
+            String url = "jdbc:mysql://localhost:3306/" + databaseName + "?autoReconnect=true&useSSL=false";
+            connection = DriverManager.getConnection(url, "root", "   ");
+            sm = connection.createStatement();
+            String query = "SELECT * FROM account" + 
+                            " WHERE username = '" + username + "'" + 
+                            " LIMIT 1;";
+            rs = sm.executeQuery(query);
 
+            // legal login
             if (rs.next()) {
-                System.out.println(rs.getString(1));
+                if (password.equals(rs.getString(1))) {
+                    HttpSession session = req.getSession(true); 
+                    session.setAttribute("PASS", "OK");
+                    session.setMaxInactiveInterval(20);
+                    res.sendRedirect("welcome?username=" + username + "&password=" + password);
+                }
             }
-
-            if (username.equals("allen") && password.equals("allen")) {
-                HttpSession session = req.getSession(true); 
-                session.setAttribute("PASS", "OK");
-                session.setMaxInactiveInterval(20);
-                res.sendRedirect("welcome?username=" + username + "&password=" + password);
-            } else {
-                res.sendRedirect("login");
-            }    
+            
+            PrintWriter out = res.getWriter();
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('User or password incorrect');");
+            out.println("location='index.jsp';");
+            out.println("</script>");
+            res.sendRedirect("login");
+   
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (sm != null) {
+                    sm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        
     }
 }
