@@ -22,3 +22,5 @@
 	'Allen', 'Qian', NULL);
 
 * SELECT * FROM student;
+
+* INSERT INTO account (username, password) (SELECT username, password FROM account);

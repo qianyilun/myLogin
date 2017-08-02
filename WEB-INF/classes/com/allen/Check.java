@@ -29,19 +29,14 @@ public class Check extends HttpServlet {
             if (rs.next()) {
                 if (password.equals(rs.getString(1))) {
                     HttpSession session = req.getSession(true); 
-                    session.setAttribute("PASS", "OK");
+                    session.setAttribute("uname", username);
                     session.setMaxInactiveInterval(20);
                     res.sendRedirect("welcome?username=" + username + "&password=" + password);
+                    return;
                 }
             }
-            
-            PrintWriter out = res.getWriter();
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('User or password incorrect');");
-            out.println("location='index.jsp';");
-            out.println("</script>");
             res.sendRedirect("login");
-   
+
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();

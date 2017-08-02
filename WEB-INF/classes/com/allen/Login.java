@@ -13,9 +13,9 @@ public class Login extends HttpServlet {
             pw.println("<h1>Login</h1>");
             pw.println("<form action=check method=post>");
 
-            pw.println("<p>Username</p><br>");
+            pw.println("<p>Username</p>");
             pw.println("<input type=text name=username>");
-            pw.println("<p>Password</p><br>");
+            pw.println("<p>Password</p>");
             pw.println("<input type=password name=password>");
 
             pw.println("<br><br>");
