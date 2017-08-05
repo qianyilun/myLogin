@@ -28,13 +28,10 @@ public class Welcome extends HttpServlet {
                 // notice must return, otherwise has NullPointerException
                 return;                
             } else {
-
                 String id = session.getId();
                 pw.println("sessionID: " + id + "</br> Session Name: " + uname + "</br>");
-
                 splitView(pw, req);
             }
-            
 
             pw.println("</center>");
             pw.println("</body>");
@@ -79,11 +76,6 @@ public class Welcome extends HttpServlet {
             if (rs.next()) {
                 recordCount = rs.getInt(1);
 
-                // ----------------------------
-                // recordCount = 10;
-                // ----------------------------
-                // System.out.println(recordCount);
-
                 // get the page numbers
                 if (recordCount % pageSize == 0) {
                     pageCount = recordCount / pageSize;
@@ -107,8 +99,7 @@ public class Welcome extends HttpServlet {
                     // e.g. SELECT * FROM account WHERE id NOT IN (SELECT * FROM account LIMIT 3) LIMIT 3;
                     recordsQuery_helper = "SELECT id FROM account " + 
                                     " LIMIT " + pageSize*(pageNow-1) + ";";
-                    System.out.println(recordsQuery_helper);
-
+                    
                     ps = ct.prepareStatement(recordsQuery_helper);
                     rs = ps.executeQuery();
                     
